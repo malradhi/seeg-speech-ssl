@@ -31,8 +31,8 @@ labelled recording:
 1. Masked pretraining on the patient's own unlabelled data improved the Transformer at every label budget and the
    bidirectional GRU at 50% to 5% labels, and beat placebo pretraining. For the Transformer it was worth about
    1.5 times the labels.
-2. Pretraining on the labelled windows alone gave the Transformer two thirds or more of this gain, so little or no
-   extra recording is needed.
+2. Pretraining on the labelled windows alone gave the Transformer 63% to 95% of this gain, so little or no extra
+   recording is needed.
 3. Pooled and leave-one-out pretraining across patients, and a six times larger population model, never beat
    own-patient pretraining; frozen features of the foundation model BrainBERT trailed it by 0.10 to 0.31 in
    correlation.
