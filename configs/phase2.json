@@ -1,0 +1,19 @@
+{
+  "_comment": "Phase 2 (docs/PHASE2_DESIGN.md). All values are the defaults in src/ieegssl/config.py; this file makes the configuration explicit and versioned.",
+  "phase2": {
+    "participants": null,
+    "phase1_dir": "phase1",
+    "fractions": [1.0, 0.5, 0.25, 0.10, 0.05],
+    "seeds_main": [1, 2, 3, 4, 5],
+    "seeds_small": [1, 2, 3],
+    "lr_extra": [1e-05, 0.003],
+    "mask_kinds": ["random", "time", "contact", "lagcons"],
+    "mask_ratios": [0.25, 0.5, 0.75],
+    "mask_fractions": [1.0, 0.10],
+    "multi_steps_per_participant": 2000,
+    "adapt_steps": 2000,
+    "scaling_k": [5, 15],
+    "scaling_fractions": [0.25, 0.10, 0.05],
+    "multi_workers": 3
+  }
+}

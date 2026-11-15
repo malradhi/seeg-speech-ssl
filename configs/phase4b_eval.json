@@ -1,0 +1,6 @@
+{
+  "_comment": "Evaluation suite on the seven-rate selections and the Phase 4b conditions, written to results/eval4b. Each condition's run is chosen on validation MSE over every phase listed.",
+  "eval": {"conditions": ["gru", "gru_ssl", "lpft_ssl", "lpft_gru_ssl", "bb_gru", "bb64_gru", "bb64_ridge",
+                          "ssl_self", "gru_ssl_self"],
+           "phases": ["phase2", "phase3", "phase4", "phase4b"], "results_dir": "eval4b"}
+}

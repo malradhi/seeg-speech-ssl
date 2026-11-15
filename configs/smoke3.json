@@ -1,0 +1,11 @@
+{
+  "_comment": "Phase 3 GPU smoke test: 3 participants, tiny budgets, written to results/smoke3 and results/smoke3_eval (never touches results/phase3 or results/eval). Numbers are meaningless.",
+  "pretrain": {"steps": 30},
+  "finetune": {"lrs": [0.0003], "max_steps": 30, "eval_every": 10, "patience": 2},
+  "phase3": {"participants": ["P01", "P02", "P03"], "results_dir": "smoke3", "fractions": [1.0, 0.1],
+             "seeds_main": [1], "seeds_small": [1], "gru_lrs": [0.0003], "gru_lr_extra": [0.003],
+             "edge_lrs": [0.01], "large_fractions": [0.1], "pooled_large_seeds": [1],
+             "multi_steps_per_participant": 20},
+  "eval": {"phases": ["phase1", "phase2", "smoke3"], "seeds": [1], "fractions": [1.0, 0.1],
+           "n_shifts": 20, "griffin_lim_iters": 5, "results_dir": "smoke3_eval"}
+}

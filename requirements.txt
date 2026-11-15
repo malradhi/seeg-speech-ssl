@@ -1,0 +1,11 @@
+# Training and evaluation (tested: Python 3.9.19, PyTorch 2.4.1 + CUDA 12.4, NumPy 1.26.3, SciPy 1.13.1).
+# For a GPU, install the PyTorch build for your CUDA version first: https://pytorch.org/get-started/locally/
+numpy>=1.24
+scipy>=1.10
+torch>=2.1
+# Statistics, figures and tables (tested: pandas 3.0, statsmodels 0.15, matplotlib 3.11)
+pandas>=2.0
+statsmodels>=0.14
+matplotlib>=3.7
+# Unit tests
+pytest>=7

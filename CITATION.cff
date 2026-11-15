@@ -1,0 +1,44 @@
+cff-version: 1.2.0
+message: "If you use this code or the released results, please cite the article below."
+title: "seeg-speech-ssl: self-supervised pretraining within and across patients for stereo-EEG speech decoding"
+type: software
+version: 1.0.0
+license: MIT
+authors:
+  - family-names: Al-Radhi
+    given-names: Mohammed Salah
+    orcid: "https://orcid.org/0000-0003-3094-6916"
+    affiliation: "Budapest University of Technology and Economics"
+  - family-names: Cengizli
+    given-names: Şevval
+    affiliation: "Atlas University"
+  - family-names: Memon
+    given-names: Saifullah
+    orcid: "https://orcid.org/0000-0002-4051-5864"
+    affiliation: "Budapest University of Technology and Economics"
+  - family-names: Verwoert
+    given-names: Maxime
+    orcid: "https://orcid.org/0000-0002-7581-2850"
+    affiliation: "Maastricht University"
+keywords:
+  - stereo-EEG
+  - speech decoding
+  - brain-computer interface
+  - self-supervised learning
+  - masked pretraining
+  - label efficiency
+preferred-citation:
+  type: article
+  title: "How much labelled speech does a new patient need? Self-supervised pretraining within and across patients for stereo-EEG speech decoding"
+  authors:
+    - family-names: Al-Radhi
+      given-names: Mohammed Salah
+    - family-names: Cengizli
+      given-names: Şevval
+    - family-names: Memon
+      given-names: Saifullah
+    - family-names: Verwoert
+      given-names: Maxime
+  journal: "Journal of Neural Engineering"
+  year: 2026
+  notes: "Submitted"

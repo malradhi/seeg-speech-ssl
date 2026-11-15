@@ -1,0 +1,4 @@
+{
+  "_comment": "Phase 5 rerun with word labels (results/ident5w): the same identification plus pairwise accuracy over pairs of different words, and the spoken word of every segment.",
+  "phase5": {"results_dir": "ident5w"}
+}

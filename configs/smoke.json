@@ -1,0 +1,7 @@
+{
+  "_comment": "Smoke test: tiny budgets, one seed, two label fractions. Only checks that everything runs end to end; the numbers are meaningless.",
+  "pretrain": {"steps": 60},
+  "finetune": {"lrs": [0.0003], "max_steps": 60, "eval_every": 20, "patience": 3},
+  "legacy": {"ft_epochs": 2, "pt_epochs": 2},
+  "phase1": {"fractions": [1.0, 0.1], "seeds": [1]}
+}

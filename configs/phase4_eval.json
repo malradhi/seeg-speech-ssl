@@ -1,0 +1,5 @@
+{
+  "_comment": "Evaluation suite for the Phase 4 conditions, written to results/eval4.",
+  "eval": {"conditions": ["lpft_ssl", "lpft_gru_ssl", "bb_gru", "bb_ridge"],
+           "phases": ["phase4"], "results_dir": "eval4"}
+}

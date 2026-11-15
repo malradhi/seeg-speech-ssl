@@ -1,0 +1,13 @@
+{
+  "_comment": "Phase 4 GPU smoke test: one participant, tiny budgets, results/smoke4 and results/smoke4_eval only. BrainBERT features are written to derived_brainbert_smoke. Numbers are meaningless.",
+  "pretrain": {"steps": 30},
+  "finetune": {"lrs": [0.0003], "max_steps": 40, "eval_every": 10, "patience": 2},
+  "brainbert": {"features_dir": "derived_brainbert_smoke"},
+  "phase4": {"participants": ["P01"], "results_dir": "smoke4", "fractions": [1.0, 0.1],
+             "seeds_main": [1], "seeds_small": [1], "grid6": [0.0003],
+             "lp": {"lr": 0.001, "max_steps": 20, "patience": 2},
+             "dose_fractions": [0.25], "dose_label_fractions": [0.1]},
+  "eval": {"conditions": ["lpft_ssl", "lpft_gru_ssl", "bb_gru", "bb_ridge"], "phases": ["smoke4"],
+           "seeds": [1], "fractions": [1.0, 0.1], "n_shifts": 20, "griffin_lim_iters": 5,
+           "results_dir": "smoke4_eval"}
+}

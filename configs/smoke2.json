@@ -1,0 +1,10 @@
+{
+  "_comment": "Phase 2 GPU smoke test: 3 participants, tiny budgets, written to results/smoke2 (never touches results/phase2). Numbers are meaningless.",
+  "pretrain": {"steps": 30},
+  "finetune": {"lrs": [0.0003], "max_steps": 30, "eval_every": 10, "patience": 2},
+  "phase2": {"participants": ["P01", "P02", "P03"], "results_dir": "smoke2", "fractions": [1.0, 0.1],
+             "seeds_main": [1], "seeds_small": [1], "lr_extra": [0.003], "mask_kinds": ["random", "time", "contact", "lagcons"],
+             "mask_ratios": [0.25], "mask_fractions": [0.1], "multi_steps_per_participant": 20, "adapt_steps": 20,
+             "scaling_k": [2], "scaling_fractions": [0.1], "multi_workers": 2},
+  "contamination": {"n_perm": 20, "n_perm_inject": 20}
+}

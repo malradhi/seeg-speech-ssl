@@ -1,0 +1,7 @@
+{
+  "_comment": "CPU sanity check used during development: shortened budgets, one seed, one fraction.",
+  "pretrain": {"steps": 600},
+  "finetune": {"lrs": [0.0003], "max_steps": 1200},
+  "phase1": {"fractions": [0.25], "seeds": [1], "deep_conditions": ["sup", "ssl", "placebo"],
+             "legacy_conditions": [], "linear_conditions": ["ridge", "pca_all"]}
+}

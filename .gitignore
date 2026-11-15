@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+
+# Cluster runs (data and results live under $IEEG_ROOT, outside the repository)
+logs/
+*.npz
+*.npy
+*.pt
+bundle_*.zip
+
+# Unpacked analysis outputs and regenerated files
+results/phase*_bundle/
+results/stats_rerun/
+paper/figures/out/
+paper/supplement/tables/
+paper/supplement/supp_tables.tex
+paper/tables/*.tex
