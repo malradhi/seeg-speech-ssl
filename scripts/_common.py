@@ -16,7 +16,7 @@ from ieegssl.config import PARTICIPANTS  # noqa: E402
 def default_root() -> str:
     root = os.environ.get("IEEG_ROOT")
     if not root:
-        sys.exit("IEEG_ROOT is not set. Run `source slurm/env.sh` first (see KOMONDOR.md).")
+        sys.exit("IEEG_ROOT is not set. Run `source slurm/env.sh` first (see docs/RUNNING_THE_STUDY.md).")
     return root
 
 

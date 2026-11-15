@@ -14,49 +14,32 @@ Code, pre-specified design documents, analysis scripts and per-run results for t
 > Submitted to the *Journal of Neural Engineering* (2026).
 
 Speech decoders for stereo-electroencephalography (sEEG) must be calibrated anew for every patient, from the
-little labelled speech that a clinical monitoring session provides. This repository tests whether
-self-supervised pretraining on the patient's own unlabelled recordings, or on other patients' data, reduces the
-labelled speech needed, and measures what the decoders actually capture. Everything needed to rerun the study
-from the raw data, or to recompute every figure, table and statistical test from the released results, is here.
+little labelled speech that a clinical monitoring session provides. The study asks whether self-supervised
+pretraining on the patient's own unlabelled recordings, or on other patients' data, reduces the labelled speech
+needed, and what the decoders capture. The repository contains the code to rerun the study from the raw data,
+and the results from which every figure, table and statistical test of the article can be recomputed.
 
 <p align="center">
   <img src="docs/study_design.png" width="760" alt="Study design: features and targets, masked pretraining, fine-tuning on few labels">
 </p>
 
-## Contents
-
-- [Main findings](#main-findings)
-- [What the study does](#what-the-study-does)
-- [Repository structure](#repository-structure)
-- [Installation](#installation)
-- [Data](#data)
-- [Reproducing the figures, tables and statistics (no GPU)](#reproducing-the-figures-tables-and-statistics-no-gpu)
-- [Running the full study from the raw data](#running-the-full-study-from-the-raw-data)
-- [Stages and pre-specified hypotheses](#stages-and-pre-specified-hypotheses)
-- [Provenance and reproducibility](#provenance-and-reproducibility)
-- [Tests](#tests)
-- [Citation](#citation)
-- [Licence and third-party code](#licence-and-third-party-code)
-- [Acknowledgements](#acknowledgements)
-- [Contact](#contact)
-
 ## Main findings
 
-On 30 participants performing three overt speech tasks, with label budgets from a median of 10.5 s to 419 s of
+In 30 participants performing three overt speech tasks, with label budgets from a median of 10.5 s to 419 s of
 labelled recording:
 
-- **Own-patient pretraining helps.** Masked pretraining on the patient's own unlabelled data improved the
-  Transformer at every label budget and the bidirectional GRU at 50% to 5% labels, and beat placebo pretraining.
-  For the Transformer it was worth about 1.5 times the labels.
-- **Little or no extra recording is needed.** Pretraining on the labelled windows alone gave the Transformer two
-  thirds or more of this gain.
-- **Other patients' data did not substitute.** Pooled and leave-one-out pretraining across patients, and a six
-  times larger population model, never beat own-patient pretraining, and frozen features of the foundation model
-  BrainBERT trailed it by 0.10 to 0.31 in correlation.
-- **Correlation mostly measures timing.** A reference that knew only when the participant spoke correlated better
-  with the true spectrogram than every decoder.
-- **Within speech,** the decoders captured loudness more than spectral shape and produced no intelligible audio,
-  yet identified the spoken segment above chance.
+1. Masked pretraining on the patient's own unlabelled data improved the Transformer at every label budget and the
+   bidirectional GRU at 50% to 5% labels, and beat placebo pretraining. For the Transformer it was worth about
+   1.5 times the labels.
+2. Pretraining on the labelled windows alone gave the Transformer two thirds or more of this gain, so little or no
+   extra recording is needed.
+3. Pooled and leave-one-out pretraining across patients, and a six times larger population model, never beat
+   own-patient pretraining; frozen features of the foundation model BrainBERT trailed it by 0.10 to 0.31 in
+   correlation.
+4. A reference that knew only when the participant spoke correlated better with the true spectrogram than every
+   decoder.
+5. Within speech, the decoders captured loudness more than spectral shape and produced no intelligible audio,
+   yet identified the spoken segment above chance.
 
 ## What the study does
 
@@ -99,7 +82,7 @@ seeg-speech-ssl/
 ├── configs/              one JSON configuration per stage, plus smoke-test configurations
 ├── slurm/                SLURM job scripts and environment set-up
 ├── analysis/             pre-specified statistics of every stage, and run_all.sh
-├── docs/                 design documents of the six stages, written before each was run
+├── docs/                 design documents of the six stages, and the guide to running the study
 ├── paper/
 │   ├── figures/          Figures 1–6 of the article
 │   ├── tables/           Table 2 of the article
@@ -109,7 +92,6 @@ seeg-speech-ssl/
 │   └── analysis_outputs.zip  per-run results, evaluation and identification outputs of every stage
 ├── tests/                fast synthetic unit tests (no data needed)
 ├── vendor/pystoi/        pystoi 0.4.1 (MIT), bundled for STOI and ESTOI
-├── KOMONDOR.md           step-by-step guide to running the study on a SLURM cluster
 ├── requirements.txt
 ├── CITATION.cff
 └── LICENSE
@@ -120,7 +102,7 @@ seeg-speech-ssl/
 Python 3.9 or newer.
 
 ```bash
-git clone https://github.com/<your-github-username>/seeg-speech-ssl.git
+git clone https://github.com/malradhi/seeg-speech-ssl.git
 cd seeg-speech-ssl
 python -m venv .venv && source .venv/bin/activate      # or a conda environment
 python -m pip install -r requirements.txt
@@ -174,8 +156,8 @@ The recomputed statistics are identical to those in `results/stats/`, which the 
 ## Running the full study from the raw data
 
 The full study needs a GPU cluster: each stage runs one job per participant (up to about 75 minutes on an A100),
-and the whole study comprises 109,418 training runs. [`KOMONDOR.md`](KOMONDOR.md) gives every step for a SLURM
-cluster, from the download to the collected result bundles. In short:
+and the whole study comprises 109,418 training runs. [`docs/RUNNING_THE_STUDY.md`](docs/RUNNING_THE_STUDY.md) gives every
+step for a SLURM cluster, from the download to the collected result bundles. In short:
 
 ```bash
 source slurm/env.sh                          # set IEEG_ROOT (and SBATCH_ACCOUNT) there first
@@ -183,7 +165,7 @@ python scripts/00_check_env.py               # environment check
 python scripts/01_download_osf.py            # dataset from OSF
 sbatch slurm/preprocess_fast.sbatch          # features of the 30 participants
 python scripts/03_audit.py                   # data audit (3,248 contacts)
-sbatch slurm/phase1.sbatch                   # Phase 1, then Phases 2-5 as in KOMONDOR.md
+sbatch slurm/phase1.sbatch                   # Phase 1, then Phases 2-5 as in the guide
 python scripts/20_collect.py --phase phase1  # result bundle of a stage
 ```
 
@@ -214,13 +196,15 @@ lists every hypothesis with its outcome.
 - Every run writes one JSON file with its metrics, training curves, selected learning rate and the SHA-256 hashes
   of the code (`src/` and `scripts/`) and of the resolved configuration; the result tables list both hashes for
   every run.
-- Five seeds per condition (three for some comparisons, as stated in the article). For a given seed, the supervised, pretrained and placebo decoders share the same
-  labelled subset, Mel-head initialisation and minibatch order, so that only the encoder initialisation differs.
+- Five seeds per condition (three for some comparisons, as stated in the article). For a given seed, the
+  supervised, pretrained and placebo decoders share the same labelled subset, Mel-head initialisation and
+  minibatch order, so that only the encoder initialisation differs.
 - Learning rates, early stopping and every other choice use the validation partition only; test scores are
   never used to select anything.
 - The code grew stage by stage (each stage added its runner), so the code hash differs between stages. This
-  release is the final version of the code; for publication only comments and the version string were edited,
-  so the hash it reports differs from those recorded in the result files.
+  release is the final version of the code. For the release, only comments, printed messages and the version
+  string were edited, without any change to the computations, so the hash it reports differs from those recorded
+  in the result files.
 
 ## Tests
 

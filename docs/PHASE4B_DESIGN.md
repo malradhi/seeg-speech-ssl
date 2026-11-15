@@ -1,4 +1,4 @@
-# Phase 4b — pre-specified design (written after Phase 4, before any Phase 4b result)
+# Phase 4b: pre-specified design (written after Phase 4, before any Phase 4b result)
 
 ## Why this phase
 
@@ -13,8 +13,7 @@ Phase 4 raised three questions:
    beyond the labelled session.
 2. **Was BrainBERT read out generously enough?** In Phase 4, nine principal components per
    contact kept 29–42% of the embedding variance, and BrainBERT features scored below the raw
-   high-gamma input. A reader can fairly ask whether the comparison would hold with a richer
-   readout.
+   high-gamma input. Whether the comparison holds with a richer readout is tested here.
 3. **Is the learning-rate grid wide enough?** In Phase 4, `lpft_gru_ssl` chose the top rate
    (3e-3) in 55% of runs. The other GRU conditions chose it in about 25%. `sup` and `ssl`
    already use seven rates (1e-5 … 1e-2); the GRU and LP-FT conditions used six.

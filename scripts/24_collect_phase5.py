@@ -1,4 +1,4 @@
-"""Bundle the Phase 5 identification results to send back.
+"""Collect the Phase 5 identification results into a zip bundle for the statistical analysis.
 
     python scripts/24_collect_phase5.py     # -> $IEEG_ROOT/bundle_phase5_<date>.zip
 """
@@ -36,4 +36,4 @@ with zipfile.ZipFile(out, "w", zipfile.ZIP_DEFLATED) as z:
         z.write(f, f"{args.dir}/{f.name}")
     for f in sorted((root / args.logs).glob(f"{args.dir}_*.out")):
         z.write(f, f"logs/{f.name}")
-print(f"Bundle written: {out}  ({out.stat().st_size / 1e6:.1f} MB) -> please send this file")
+print(f"Bundle written: {out}  ({out.stat().st_size / 1e6:.1f} MB)")

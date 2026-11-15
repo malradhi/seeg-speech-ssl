@@ -1,6 +1,6 @@
 """Pre-specified Phase 3 analysis (docs/PHASE3_DESIGN.md).
 
-Usage: python -I stats3.py <p1_dir> <p2_dir> <p3_dir> <out_json> [exclude_pid ...]
+Usage: python -I phase3_stats.py <p1_dir> <p2_dir> <p3_dir> <out_json> [exclude_pid ...]
 
 Selection: best learning rate per (participant, condition, fraction, seed) on validation MSE
 over the grid named in the design (gru: six rates over Phases 2-3; sup/ssl: seven rates over

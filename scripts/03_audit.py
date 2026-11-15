@@ -4,7 +4,7 @@ Checks: finite features/targets, lag dimensionality, non-overlapping partitions,
 boundaries placed in silence, durations, windows, speech fraction, and how many
 test stimuli were already seen in training (relevant for repeated words).
 
-Output: $IEEG_ROOT/audit/data_summary.csv  (send this file back)
+Output: $IEEG_ROOT/audit/data_summary.csv
 """
 
 from __future__ import annotations

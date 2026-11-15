@@ -1,8 +1,8 @@
 # Source from the repository root before running anything:
 #     source slurm/env.sh
 #
-# >>> EDIT: where the data and results go (about 35 GB at the peak; see KOMONDOR.md) <<<
-export IEEG_ROOT="${IEEG_ROOT:-$HOME/ieeg_jne}"
+# >>> EDIT: where the data and results go (about 35 GB at the peak; see docs/RUNNING_THE_STUDY.md) <<<
+export IEEG_ROOT="${IEEG_ROOT:-$HOME/seeg_data}"
 
 # >>> EDIT: your SLURM project account, if your cluster needs one (read by sbatch) <<<
 # export SBATCH_ACCOUNT=your_project_account
@@ -28,7 +28,7 @@ fi
 if _ieeg_py_ok; then
     echo "Python OK: $(python --version 2>&1)  ($(python -c 'import sys; print(sys.executable)'))"
 else
-    echo "ERROR: no Python >= 3.8 available. Send the output of: module avail python; module avail pytorch"
+    echo "ERROR: no Python >= 3.8 available. Check: module avail python; module avail pytorch"
 fi
 
 export REPO="${SLURM_SUBMIT_DIR:-$(pwd)}"

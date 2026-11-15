@@ -1,4 +1,4 @@
-# Phase 4 — pre-specified design (written before any Phase 4 result)
+# Phase 4: pre-specified design (written before any Phase 4 result)
 
 ## Why this phase
 

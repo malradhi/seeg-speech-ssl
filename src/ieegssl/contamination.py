@@ -1,6 +1,6 @@
 """Acoustic-contamination audit (after Roussel et al., 2020, J. Neural Eng. 17:056028).
 
-Idea: genuine speech-related neural activity correlates with the audio *broadly*
+Principle: genuine speech-related neural activity correlates with the audio *broadly*
 (louder speech -> more high-gamma at all frequencies), whereas acoustic contamination
 (the microphone signal leaking into the electrodes) correlates with the audio at the
 *same* frequency. For each channel we correlate log-power spectrograms of audio and

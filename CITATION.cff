@@ -4,6 +4,7 @@ title: "seeg-speech-ssl: self-supervised pretraining within and across patients 
 type: software
 version: 1.0.0
 license: MIT
+repository-code: "https://github.com/malradhi/seeg-speech-ssl"
 authors:
   - family-names: Al-Radhi
     given-names: Mohammed Salah

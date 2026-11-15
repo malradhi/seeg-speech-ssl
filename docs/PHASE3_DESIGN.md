@@ -1,11 +1,11 @@
-# Phase 3 — pre-specified design (written before any Phase 3 result)
+# Phase 3: pre-specified design (written before any Phase 3 result)
 
 ## Why this phase
 
 Phase 2 (33,845 runs, analysed 2026-11-05) settled the cross-patient question by the rule
 fixed in advance: neither H5 nor H7 held, so the paper leads with the controlled
 within-patient result, the negative cross-patient result and what the metrics measure.
-It also raised three objections that a reviewer will make and that only new runs can answer:
+It also left three open questions that only new runs can answer:
 
 1. **A supervised bidirectional GRU matches the SSL Transformer** (overall r: GRU ahead at
    50% and 25% labels, tie at 10% and 5%; within-speech r: tie everywhere). Does masked

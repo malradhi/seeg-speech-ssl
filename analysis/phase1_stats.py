@@ -1,4 +1,4 @@
-"""Pre-specified Phase 1 analysis (docs/PHASE1_DESIGN.md). Usage: python -I stats.py <bundle_dir> <out_json>"""
+"""Pre-specified Phase 1 analysis (docs/PHASE1_DESIGN.md). Usage: python -I phase1_stats.py <bundle_dir> <out_json>"""
 import sys, os, json
 import numpy as np, pandas as pd
 from scipy import stats

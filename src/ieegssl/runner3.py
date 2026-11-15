@@ -199,7 +199,7 @@ def run_participant3(pid: str, cfg: dict, root, workers: int = 8, device: str = 
                if not (paths.encoders / f"{pid}__pooled_L__s{s}.pt").exists()]
     if missing:
         raise FileNotFoundError(f"{pid}: pooled_L encoders missing for seeds {missing}; run the "
-                                "phase3_pooled job first (KOMONDOR.md, step 7)")
+                                "phase3_pooled job first (docs/RUNNING_THE_STUDY.md, step 7)")
     if device == "auto":
         device = "cuda" if torch.cuda.is_available() else "cpu"
     R._atomic_json(paths.base / f"config_{config_hash(cfg)}.json", cfg)

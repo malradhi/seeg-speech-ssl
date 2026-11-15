@@ -3,7 +3,7 @@
 The study was run on the Komondor supercomputer (NVIDIA A100 GPUs). The job scripts in `slurm/` are written
 for SLURM and should run on any SLURM cluster after two edits in `slurm/env.sh`:
 
-* `IEEG_ROOT`: where the data and results go (default `$HOME/ieeg_jne`). About 10 GB of raw data, 5 GB of
+* `IEEG_ROOT`: where the data and results go (default `$HOME/seeg_data`). About 10 GB of raw data, 5 GB of
   results for Phases 1–4 and up to 17 GB more during Phase 4b (BrainBERT features, which can be deleted
   after the Phase 4b bundle has been collected).
 * `SBATCH_ACCOUNT`: your project account, if your cluster needs one.
@@ -14,17 +14,15 @@ runs are skipped, so a job that hits its time limit is simply submitted again.
 
 Run everything from the repository root, and run `source slurm/env.sh` in every new terminal.
 
----
-
-## Step 0 — Set up (once)
+## Step 0. Set up (once)
 
 ```bash
-git clone <this repository> && cd <repository folder>
+git clone https://github.com/malradhi/seeg-speech-ssl.git && cd seeg-speech-ssl
 mkdir -p logs
 source slurm/env.sh
 ```
 
-## Step 1 — Check the Python environment (login node, 1 min)
+## Step 1. Check the Python environment (login node, 1 min)
 
 ```bash
 python scripts/00_check_env.py
@@ -32,7 +30,7 @@ python scripts/00_check_env.py
 
 It ends with `ENVIRONMENT OK` (CUDA is usually not available on the login node; that is expected).
 
-## Step 2 — Download the dataset (login node, 10–30 min)
+## Step 2. Download the dataset (login node, 10–30 min)
 
 ```bash
 python scripts/01_download_osf.py --only P15        # one participant, enough for the smoke test
@@ -48,7 +46,7 @@ cd $IEEG_ROOT && wget -O ak3dp.zip "https://files.osf.io/v1/resources/ak3dp/prov
 mkdir -p raw && unzip ak3dp.zip -d raw && cd -
 ```
 
-## Step 3 — Smoke test on a GPU (~10 min)
+## Step 3. Smoke test on a GPU (~10 min)
 
 ```bash
 sbatch slurm/smoke_test.sbatch
@@ -57,7 +55,7 @@ tail -40 logs/smoke_*.out                           # must end with SMOKE TEST F
 
 The numbers it prints are meaningless (tiny training budget); it only checks that everything runs on the GPU.
 
-## Step 4 — Preprocess the 30 participants (~10 min)
+## Step 4. Preprocess the 30 participants (~10 min)
 
 ```bash
 PREP=$(sbatch --parsable slurm/preprocess_fast.sbatch)
@@ -68,7 +66,7 @@ python scripts/03_audit.py                          # ends with the contact tota
 
 Expected contact totals: unique words 1,103, repeated words 1,050, sentences 1,095; 3,248 in total.
 
-## Step 5 — Phase 1: own-patient pretraining vs supervised and placebo ([design](docs/PHASE1_DESIGN.md))
+## Step 5. Phase 1: own-patient pretraining vs supervised and placebo ([design](PHASE1_DESIGN.md))
 
 ```bash
 sbatch slurm/phase1.sbatch                          # 30 GPU tasks, one per participant
@@ -77,7 +75,7 @@ python scripts/21_quicklook.py                      # summary table (add --metri
 python scripts/20_collect.py                        # -> $IEEG_ROOT/bundle_phase1_<date>.zip
 ```
 
-## Step 6 — Phase 2: other patients' data, masking ablation, contamination audit ([design](docs/PHASE2_DESIGN.md))
+## Step 6. Phase 2: other patients' data, masking ablation, contamination audit ([design](PHASE2_DESIGN.md))
 
 Phase 2 reuses the Phase 1 encoders, so `results/phase1` must stay in place.
 
@@ -89,7 +87,7 @@ sbatch --dependency=afterok:$MULTI slurm/phase2.sbatch     # 30 GPU tasks, after
 python scripts/20_collect.py --phase phase2         # 33,845 run files, all ok
 ```
 
-## Step 7 — Phase 3: pretrained GRU, large pooled model, evaluation suite ([design](docs/PHASE3_DESIGN.md))
+## Step 7. Phase 3: pretrained GRU, large pooled model, evaluation suite ([design](PHASE3_DESIGN.md))
 
 ```bash
 sbatch slurm/smoke_phase3.sbatch                    # optional check, must end with SMOKE3 FINISHED
@@ -100,7 +98,7 @@ python scripts/22_eval_summary.py
 python scripts/20_collect.py --phase phase3         # 18,963 run files, all ok
 ```
 
-## Step 8 — Phase 4: BrainBERT, unlabelled-data dose, LP-FT ([design](docs/PHASE4_DESIGN.md))
+## Step 8. Phase 4: BrainBERT, unlabelled-data dose, LP-FT ([design](PHASE4_DESIGN.md))
 
 ```bash
 python scripts/04_download_brainbert.py             # login node, ~175 MB once; ends with BRAINBERT OK
@@ -111,7 +109,7 @@ python scripts/22_eval_summary.py --dir eval4
 python scripts/20_collect.py --phase phase4 --eval-dir eval4         # 21,270 run files, all ok
 ```
 
-## Step 9 — Phase 4b: self-pretraining, seven learning rates, BrainBERT with 16–64 components ([design](docs/PHASE4B_DESIGN.md))
+## Step 9. Phase 4b: self-pretraining, seven learning rates, BrainBERT with 16–64 components ([design](PHASE4B_DESIGN.md))
 
 ```bash
 sbatch slurm/smoke_phase4b.sbatch                   # optional check, must end with SMOKE4B FINISHED
@@ -121,7 +119,7 @@ python scripts/22_eval_summary.py --dir eval4b
 python scripts/20_collect.py --phase phase4b --eval-dir eval4b       # 22,110 run files, all ok
 ```
 
-## Step 10 — Phase 5: identification from the saved predictions ([design](docs/PHASE5_DESIGN.md))
+## Step 10. Phase 5: identification from the saved predictions ([design](PHASE5_DESIGN.md))
 
 No training and no GPU; reads the saved test predictions of Phases 1–4b.
 
@@ -132,14 +130,12 @@ sbatch slurm/identify_words.sbatch                  # word-level rerun: pairs of
 python scripts/24_collect_phase5.py --dir ident5w
 ```
 
-## Step 11 — Statistics, figures and supplementary tables (any machine, no GPU)
+## Step 11. Statistics, figures and supplementary tables (any machine, no GPU)
 
 Unzip each bundle into a folder named after its phase (`phase1_bundle/`, …, `phase4b_bundle/`,
 `phase5_bundle/` for `ident5`, `phase5w_bundle/` for `ident5w`), all inside one directory, and run the
-analyses as described in [`analysis/README.md`](analysis/README.md) and [`paper/README.md`](paper/README.md).
+analyses as described in [`analysis/README.md`](../analysis/README.md) and [`paper/README.md`](../paper/README.md).
 The released outputs in `results/` have exactly this layout.
-
----
 
 ### Useful SLURM commands
 

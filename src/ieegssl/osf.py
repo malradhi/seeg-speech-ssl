@@ -24,7 +24,7 @@ def _get_json(url: str, retries: int = 5) -> dict:
             req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
             with urllib.request.urlopen(req, timeout=60) as resp:
                 return json.loads(resp.read().decode("utf-8"))
-        except Exception as exc:  # network hiccup -> retry with backoff
+        except Exception as exc:  # transient network error: retry with backoff
             if attempt == retries - 1:
                 raise
             wait = 2 ** attempt

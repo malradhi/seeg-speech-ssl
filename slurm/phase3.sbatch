@@ -9,7 +9,7 @@
 #SBATCH --output=logs/p3_%A_%a.out
 #SBATCH --error=logs/p3_%A_%a.out
 # One task per participant; needs all three phase3_pooled tasks finished (submit with
-# --dependency=afterok:<pooled job id>, see KOMONDOR.md, step 7). Resubmitting is safe.
+# --dependency=afterok:<pooled job id>, see docs/RUNNING_THE_STUDY.md, step 7). Resubmitting is safe.
 set -eo pipefail
 source slurm/env.sh
 nvidia-smi --query-gpu=name,memory.total --format=csv || true

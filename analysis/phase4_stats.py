@@ -1,6 +1,6 @@
 """Pre-specified Phase 4 analysis (docs/PHASE4_DESIGN.md).
 
-Usage: python -I stats4.py <p1_dir> <p2_dir> <p3_dir> <p4_dir> <out_json> [exclude_pid ...]
+Usage: python -I phase4_stats.py <p1_dir> <p2_dir> <p3_dir> <p4_dir> <out_json> [exclude_pid ...]
 
 Selection: best learning rate per (participant, condition, fraction, seed) on validation MSE
 over the grid named in the design (gru: six rates over Phases 2-3; sup/ssl: seven rates over

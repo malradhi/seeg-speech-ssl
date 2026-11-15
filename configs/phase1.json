@@ -1,5 +1,5 @@
 {
-  "_comment": "Phase 1 (decisive test). All values are the defaults in src/ieegssl/config.py; this file exists so the exact configuration used is explicit and versioned.",
+  "_comment": "Phase 1 (docs/PHASE1_DESIGN.md). All values are the defaults in src/ieegssl/config.py; this file exists so the exact configuration used is explicit and versioned.",
   "phase1": {
     "fractions": [1.0, 0.5, 0.25, 0.10, 0.05],
     "seeds": [1, 2, 3, 4, 5],

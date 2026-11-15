@@ -1,10 +1,10 @@
-"""Collect all run files into one CSV and a small zip bundle to send back.
+"""Collect all run files of a stage into one CSV and a zip bundle for the statistical analysis.
 
-    python scripts/20_collect.py            # -> $IEEG_ROOT/bundle_phase1.zip
+    python scripts/20_collect.py --phase phase1    # -> $IEEG_ROOT/bundle_phase1_<date>.zip
 
 The bundle contains: results CSV, every run JSON (metrics, curves, provenance),
 the resolved config, the data audit and the SLURM logs. Predictions and encoder
-weights stay on Komondor.
+weights stay under $IEEG_ROOT.
 """
 
 from __future__ import annotations
@@ -65,4 +65,4 @@ with zipfile.ZipFile(bundle, "w", zipfile.ZIP_DEFLATED) as z:
         if logdir.exists():
             for p in sorted(logdir.glob("*.out")) + sorted(logdir.glob("*.err")):
                 z.write(p, f"logs/{p.name}")
-print(f"Bundle written: {bundle}  ({bundle.stat().st_size / 1e6:.1f} MB) -> please send this file")
+print(f"Bundle written: {bundle}  ({bundle.stat().st_size / 1e6:.1f} MB)")

@@ -1,4 +1,4 @@
-"""Figures 2-6 of the JNE manuscript from the participant-level results.
+"""Figures 2-6 of the article from the participant-level results.
 
 Usage: python make_figures.py <directory holding the phase bundles> <output directory>
 Error bars are 95% bootstrap confidence intervals of the participant mean (10,000 resamples),
@@ -21,7 +21,7 @@ from figdata import FR, LOW, S3, S5, ci95, ewide, iwide, label_ratio, load, wide
 ROOT, OUT = sys.argv[1], sys.argv[2]
 os.makedirs(OUT, exist_ok=True)
 
-# ---- style: validated categorical slots (light), neutral ink for references -------------
+# ---- style: one colour per decoder family, grey for references -------------------------
 BLUE, ORANGE, AQUA, VIOLET = "#2a78d6", "#eb6834", "#1baf7a", "#6250d6"
 INK, INK2, MUTED, GRID = "#0b0b0b", "#52514e", "#8a8984", "#e6e5e0"
 CM = 1 / 2.54

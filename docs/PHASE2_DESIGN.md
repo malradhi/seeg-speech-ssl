@@ -1,4 +1,4 @@
-# Phase 2 — pre-specified design (written before any Phase 2 result)
+# Phase 2: pre-specified design (written before any Phase 2 result)
 
 ## The paper this phase builds
 
@@ -93,5 +93,4 @@ masking grid, `loo_*` and `scale*`. Label budgets 100/50/25/10/5 % (scaling: 25/
 * If H5 or H7 holds: the paper leads with cross-patient pretraining for new-patient
   calibration (Phase 1 becomes the within-patient baseline section).
 * If neither holds: the paper leads with the controlled within-patient result, the
-  negative cross-patient result (equally publishable and useful), and the evaluation
-  findings (timing-dominated r, ridge strength).
+  negative cross-patient result and the evaluation findings (timing-dominated r, ridge strength).

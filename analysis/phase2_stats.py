@@ -1,6 +1,6 @@
 """Pre-specified Phase 2 analysis (docs/PHASE2_DESIGN.md).
 
-Usage: python -I stats2.py <phase1_bundle_dir> <phase2_bundle_dir> <out_json> [exclude_pid ...]
+Usage: python -I phase2_stats.py <phase1_bundle_dir> <phase2_bundle_dir> <out_json> [exclude_pid ...]
 
 Selection rules (fixed before looking at Phase 2 results):
 * deep fine-tunes: best LR per (participant, condition, fraction, seed) on validation MSE;

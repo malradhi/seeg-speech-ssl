@@ -1,4 +1,4 @@
-# Phase 5 — pre-specified design (written after Phase 4b, before any Phase 5 result)
+# Phase 5: pre-specified design (written after Phase 4b, before any Phase 5 result)
 
 ## Why this phase
 
